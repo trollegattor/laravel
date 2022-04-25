@@ -11,9 +11,9 @@ class MenusSeeder extends Seeder
     public function run()
     {
         DB::table('menus')->insert([
-            ['title'=>'About us','categories_id'=>1],
-            ['title'=>'News','categories_id'=>2],
-            ['title'=>'Contacts','categories_id'=>3],
+            ['title'=>'About us','category_id'=>1],
+            ['title'=>'News','category_id'=>2],
+            ['title'=>'Contacts','category_id'=>3],
         ]);
     }
 }
