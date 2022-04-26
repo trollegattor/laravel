@@ -12,6 +12,7 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
     public $fillable = [
+        'category_id',
         'title',
         'content',
         'author',
