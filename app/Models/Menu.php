@@ -8,12 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
-    public $timestamps=false;
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
+
+    /**
+     * @var string[]
+     */
     public $fillable = [
         'category_id',
         'title',
     ];
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Menu;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,14 +12,18 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class MenuFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @var string
+     */
+    protected $model = Menu::class;
+
+    /**
+     * @return array|mixed[]
      */
     public function definition()
     {
         return [
-            //
+            'category_id' => Category::factory(),
+            'title' => $this->faker->sentence(3),
         ];
     }
 }

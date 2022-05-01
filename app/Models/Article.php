@@ -8,18 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    public function category(){
-        return $this->belongsTo(Category::class);
-    }
+    public const ARTICLE_AUTHOR=[
+        'ADMIN'=>'admin',
+        'USER'=>'user'
+    ];
+
+    /**
+     * @var string[]
+     */
     public $fillable = [
         'category_id',
         'title',
         'content',
         'author',
     ];
-    protected $dates=[
+    /**
+     * @var string[]
+     */
+    protected $dates = [
         'created_at',
         'updated_at',
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 
 }

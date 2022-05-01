@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -11,21 +12,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ArticleFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @var string
      */
     protected $model = Article::class;
 
+    /**
+     * @inheritDoc
+     */
     public function definition()
     {
-        $author=array('admin','user');
         return [
-            'category_id'=>rand(1,3),
-            'title'=>$this->faker->sentence(3),
-            'content'=>$this->faker->paragraph(),
-            'author'=>$author[array_rand($author)]
-
+            'category_id' => Category::factory(),
+            'title' => $this->faker->sentence(3),
+            'content' => $this->faker->paragraph(),
+            'author' =>Article::ARTICLE_AUTHOR[array_rand(Article::ARTICLE_AUTHOR)]
         ];
     }
 }

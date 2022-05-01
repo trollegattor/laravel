@@ -6,14 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMenusTable extends Migration
 {
-
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned()->default(1);
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->char('title',200);
+            $table->unsignedInteger('category_id');
+            $table->string('title',200);
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 

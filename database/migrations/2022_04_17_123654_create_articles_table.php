@@ -17,9 +17,9 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned()->default(1);
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->char('title',200);
+            $table->string('title');
             $table->text('content');
-            $table->enum('author',['admin','user']);
+            $table->enum('author', ['admin', 'user']);
             $table->timestamps();
         });
     }

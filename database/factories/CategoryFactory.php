@@ -11,17 +11,20 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class CategoryFactory extends Factory
 {
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @var string
      */
     protected $model = Category::class;
+
+    /**
+     * @return array|mixed[]
+     */
     public function definition()
     {
-        $type=array('single','multiple');
+        $type = ['single', 'multiple'];
+
         return [
-            'name'=>$this->faker->name(),
-            'type'=>$type[array_rand($type)]
+            'name' => $this->faker->name(),
+            'type' => $type[array_rand($type)]
         ];
     }
 }
