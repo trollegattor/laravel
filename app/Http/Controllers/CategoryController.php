@@ -8,16 +8,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function show(int $categoryId)
+    public function show()
     {
         //$categoryName = $request->input('name');
-        $category = Category::find($categoryId);
+        $category = Category::all();
       /*  foreach ($category as $a) {
             print($a);
             echo '<br>';
         }*/
 
-        return $category;
+        return view('home.index',[
+            'category'=>$category,
+        ]);
     }
 }
 
