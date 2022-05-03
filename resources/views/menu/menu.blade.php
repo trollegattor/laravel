@@ -134,20 +134,20 @@
 
                     <div class="product_grid">
 
-                        @foreach($category as $product)
-                                <!-- Product -->
-                                @php
-                                $menu=$product->menus()->value('title');
-                                @endphp
-                                <div class="product">
-                                    <div class="product_image"><img src="images/product_1.jpg" alt=""></div>
-                                    <div class="product_extra product_new"><a href="categories.html">{{$product->id}}</a></div>
-                                    <div class="product_content">
-                                        <div class="product_title"><a href="product.html">{{$product->name}}</a></div>
-                                        <div class="product_price">{{$menu}}</div>
-                                    </div>
+
+                        <!-- Product -->
+                            @php
+                                print_r($menu);
+                            @endphp
+                            <div class="product">
+                                <div class="product_image"><img src="images/product_1.jpg" alt=""></div>
+                                <div class="product_extra product_new"><a href="categories.html">fhfxj</a></div>
+                                <div class="product_content">
+                                    <div class="product_title"><a href="product.html">xfgj</a></div>
+                                    <div class="product_price">fgxjxfj</div>
                                 </div>
-                            @endforeach
+                            </div>
+
 
 
 
