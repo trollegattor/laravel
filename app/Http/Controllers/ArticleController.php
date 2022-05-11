@@ -17,7 +17,6 @@ class ArticleController extends Controller
     }
     public function articles(){
         $url=route('id');
-        echo $url;
         return redirect()->route('id');
         /*
         $articles=Article::find(1);

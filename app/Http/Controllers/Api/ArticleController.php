@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -16,40 +17,36 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return ArticleResource::collection(Article::all());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ArticleResource::collection(Article::query()->paginate());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreArticleRequest $request
+     *
+     * @return ArticleResource
      */
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request): ArticleResource
     {
-        $created_article=Article::create($request->all());
-        return new ArticleResource($created_article);
+        $article = Article::query()->create([
+            'category_id' => $request->input('category_id'),
+            //..
+        ]);
+
+        return new ArticleResource($article);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return ArticleResource
      */
-    public function show($id)
+    public function show(int $id): ArticleResource
     {
-       return new ArticleResource(Article::findOrFail($id));
+       return new ArticleResource(Article::query()->findOrFail($id));
     }
 
     /**

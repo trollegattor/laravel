@@ -19,6 +19,6 @@ class CategoryArticleResource extends JsonResource
             'title'=>$this->title,
             'content'=>$this->content,
             'author'=>$this->author,
-            ];
+        ];
     }
 }
