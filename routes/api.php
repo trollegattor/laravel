@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,8 @@ Route::resources([
     ]);
 Route::resources([
     'category' => CategoryController::class,
+]);
+Route::resources([
+    'menu' => MenuController::class,
 ]);
 

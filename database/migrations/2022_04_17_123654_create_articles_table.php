@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use App\Models\Article;
 class CreateArticlesTable extends Migration
 {
     /**
@@ -15,15 +15,18 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned()->default(1);
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->unsignedInteger('category_id');
             $table->string('title');
             $table->text('content');
-            $table->enum('author', ['admin', 'user']);
+            $table->enum('author', Article::ARTICLE_AUTHOR);
             $table->timestamps();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
-
     /**
      * Reverse the migrations.
      *
