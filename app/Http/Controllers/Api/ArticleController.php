@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -45,9 +46,9 @@ class ArticleController extends Controller
      *
      * @return ArticleResource
      */
-    public function show(int $id): ArticleResource
+    public function show(Article $article): ArticleResource
     {
-       return new ArticleResource(Article::with('category')->findOrFail($id));
+       return new ArticleResource($article);
     }
 
     /**
@@ -68,7 +69,7 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreArticleRequest $request, Article $article)
+    public function update(StoreArticleRequest $request, Article $article): ArticleResource
     {
         $article->update([
             'category_id' => $request->input('category_id'),
@@ -76,6 +77,7 @@ class ArticleController extends Controller
             'content' => $request->input('content'),
             'author' => $request->input('author'),
         ]);
+        return new ArticleResource($article);
     }
 
     /**
@@ -84,8 +86,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return null;
     }
 }
