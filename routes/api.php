@@ -23,11 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resources([
     'articles' => ArticleController::class,
-    ]);
-Route::resources([
     'category' => CategoryController::class,
-]);
-Route::resources([
     'menu' => MenuController::class,
-]);
+    ]);
+
 
