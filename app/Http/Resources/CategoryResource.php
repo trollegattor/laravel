@@ -18,7 +18,8 @@ class CategoryResource extends JsonResource
             'id'=>$this->id,
             'name'=>$this->name,
             'type'=>$this->type,
-            //'articles'=>CategoryArticleResource::collection($this->articles),
+            'menus'=>MenuResource::collection($this->menus),
+            'articles'=>CategoryArticleResource::collection($this->articles),
         ];
 
     }
