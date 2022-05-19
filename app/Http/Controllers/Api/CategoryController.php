@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::with('articles')->get());
+        return CategoryResource::collection(Category::all());
     }
 
     /**
@@ -46,9 +46,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id): CategoryResource
     {
-        return new CategoryResource(Category::with('articles')->findOrFail($id));
+       return new CategoryResource(Category::with('menus','articles')->findOrFail($id));
     }
 
     /**

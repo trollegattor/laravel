@@ -17,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return ArticleResource::collection(Article::query()->paginate());
+        return ArticleResource::collection(Article::all());
     }
 
     /**
@@ -29,11 +29,12 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request): ArticleResource
     {
-        $article = Article::query()->create([
+        $article = Article::create([
             'category_id' => $request->input('category_id'),
-            //..
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'author' => $request->input('author'),
         ]);
-
         return new ArticleResource($article);
     }
 
@@ -46,7 +47,7 @@ class ArticleController extends Controller
      */
     public function show(int $id): ArticleResource
     {
-       return new ArticleResource(Article::query()->findOrFail($id));
+       return new ArticleResource(Article::with('category')->findOrFail($id));
     }
 
     /**
@@ -67,9 +68,14 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreArticleRequest $request, Article $article)
     {
-        //
+        $article->update([
+            'category_id' => $request->input('category_id'),
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'author' => $request->input('author'),
+        ]);
     }
 
     /**
