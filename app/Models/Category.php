@@ -25,6 +25,7 @@ class Category extends Model
     public $fillable = [
         'name',
         'type',
+        'parent_id',
     ];
 
     public function menus()
