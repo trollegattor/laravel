@@ -13,15 +13,18 @@ class DatabaseSeeder extends Seeder
     {
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
-            'name' => 'News'
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
         ]);
         $aboutUsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
-            'name' => 'About us'
+            'name' => 'About us',
+            'parent_id'=>Category::PARENT_ID['NULL'],
         ]);
         $contactsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
-            'name' => 'Contacts'
+            'name' => 'Contacts',
+            'parent_id'=>Category::PARENT_ID['NULL'],
         ]);
         $aboutUsMenu = Menu::query()->create([
             'category_id' => $aboutUsCategory->id,
@@ -35,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'category_id' => $contactsCategory->id,
             'title' => 'Contacts',
         ]);
+        Category::factory()->count(10)->create();
         Article::factory()->create([
             'category_id' => $aboutUsCategory->id,
             'author' => Article::ARTICLE_AUTHOR['ADMIN'],
@@ -43,6 +47,6 @@ class DatabaseSeeder extends Seeder
             'category_id' => $contactsCategory->id,
             'author' => Article::ARTICLE_AUTHOR['ADMIN'],
         ]);
-        Article::factory()->count(100)->create(['category_id' => $newsCategory->id]);
+        Article::factory()->count(100)->create();
     }
 }

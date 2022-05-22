@@ -24,7 +24,8 @@ class CategoryFactory extends Factory
 
         return [
             'name' => $this->faker->name(),
-            'type' => $type[array_rand($type)]
+            'type' => 'multiple',
+            'parent_id'=>Category::where('name','News')->value('id'),
         ];
     }
 }

@@ -5,20 +5,23 @@ use App\Models\Category;
 use App\Models\Article;
 
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Null_;
 
 class CategoryController extends Controller
 {
     public function show()
     {
-        //$categoryName = $request->input('name');
-        $category = Category::all();
-      /*  foreach ($category as $a) {
-            print($a);
-            echo '<br>';
-        }*/
-        return view('home.index',[
-            'category'=>$category,
-        ]);
+        $category = Category::first();
+        if (Category::first() == Null){
+            echo 'nulll';
+        }
+        else{
+            echo 'NOT NULL';
+        }
+
+        echo gettype($category);
+        echo $category;
+
     }
     public function result(Request $request)
     {

@@ -14,6 +14,9 @@ class Category extends Model
         'SINGLE' => 'single',
         'MULTI' => 'multiple',
     ];
+    public const PARENT_ID =[
+        'NULL'=>null,
+    ];
     /**
      * @var bool
      */
@@ -27,6 +30,15 @@ class Category extends Model
         'type',
         'parent_id',
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class,'parent_id');
+    }
+    public function children()
+    {
+    return $this->hasMany(self::class, 'parent_id');
+    }
 
     public function menus()
     {

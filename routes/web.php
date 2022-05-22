@@ -9,8 +9,8 @@ Route::get('/',[CategoryController::class,'show'] );
 /*Route::any('/comments',function (){
     print_r($_POST);
 });*/
-/*Route::get('/',[CategoryController::class,'show']);
-Route::get('/title',[ArticleController::class,'showtitle']);
+Route::get('/',[CategoryController::class,'show']);
+/*Route::get('/title',[ArticleController::class,'showtitle']);
 Route::get('/articles/id',[ArticleController::class,'articles'])->name('id');
 
 Route::get('/menu/{id}',[MenuController::class,'show']);
