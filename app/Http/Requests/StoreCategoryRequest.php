@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -15,9 +17,11 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'names'=>['required', 'string', 'max:200'],
+            'name'=>['required', 'string', 'max:200'],
             'type'=>['required', 'string', 'in:single,multiple'],
-            'parent_id'=>['required', 'integer','nullable', 'in:1,null'],
+            'parent_id'=>['integer', 'nullable',
+                Rule::exists('categories','id')->where('name','News'),
+            ],
         ];
     }
 }

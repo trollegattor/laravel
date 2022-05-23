@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'News',
             'parent_id'=>Category::PARENT_ID['NULL'],
         ]);
+        $firstSubCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'About Ukraine',
+            'parent_id'=> $newsCategory->id,
+        ]);
         $aboutUsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
             'name' => 'About us',
@@ -47,6 +52,8 @@ class DatabaseSeeder extends Seeder
             'category_id' => $contactsCategory->id,
             'author' => Article::ARTICLE_AUTHOR['ADMIN'],
         ]);
-        Article::factory()->count(100)->create();
+
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        Article::factory()->count(10)->create(['category_id' => $firstSubCategory->id]);
     }
 }

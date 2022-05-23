@@ -11,13 +11,7 @@ class CategoryController extends Controller
 {
     public function show()
     {
-        $category = Category::first();
-        if (Category::first() == Null){
-            echo 'nulll';
-        }
-        else{
-            echo 'NOT NULL';
-        }
+        $category = Category::where('name','News')->value('id');
 
         echo gettype($category);
         echo $category;

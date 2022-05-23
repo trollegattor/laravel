@@ -22,13 +22,10 @@ class ArticleFactory extends Factory
     public function definition()
     {
         return [
-            //'category_id' => Category::factory(),
-            'category_id' =>(Category::first() == Null)?Category::factory():Category::where('parent_id','!=',null)
-                ->pluck('id')
-                ->random(1)[0],
+            'category_id' => Category::factory(),
             'title' => $this->faker->sentence(3),
             'content' => $this->faker->paragraph(),
-            'author' =>Article::ARTICLE_AUTHOR[array_rand(Article::ARTICLE_AUTHOR)]
+            'author' => Article::ARTICLE_AUTHOR[array_rand(Article::ARTICLE_AUTHOR)]
         ];
     }
 }

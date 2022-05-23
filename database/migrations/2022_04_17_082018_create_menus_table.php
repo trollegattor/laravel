@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMenusTable extends Migration
 {
+    /**
+     * @return void
+     */
     public function up()
     {
         Schema::create('menus', function (Blueprint $table) {
@@ -20,6 +23,9 @@ class CreateMenusTable extends Migration
         });
     }
 
+    /**
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('menus');

@@ -21,8 +21,7 @@ class ArticleResource extends JsonResource
             'content'=>$this->content,
             'author'=>$this->author,
             'created_at'=>$this->created_at,
-            'category'=>$this->category_id,
-            'category1'=>$this->category,
+            'category_id'=>$this->category_id,
         ];
     }
 }

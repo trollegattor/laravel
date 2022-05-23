@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreMenuRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Menu;
 use Illuminate\Http\Request;
@@ -20,68 +21,55 @@ class MenuController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMenuRequest $request): MenuResource
     {
-        //
+        $menu = Menu::create([
+            'category_id' => $request->input('category_id'),
+            'title' => $request->input('title'),
+        ]);
+        return new MenuResource($menu);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id): MenuResource
+    public function show(Menu $menu): MenuResource
     {
-        return new MenuResource(Menu::query()->findOrFail($id));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return new MenuResource($menu);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreMenuRequest $request, Menu $menu): MenuResource
     {
-        //
+        $menu->update([
+            'category_id' => $request->input('category_id'),
+            'title' => $request->input('title'),
+        ]);
+        return new MenuResource($menu);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        return $menu->delete();
     }
 }

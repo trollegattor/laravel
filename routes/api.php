@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 
-Route::resources([
+Route::apiResources([
     'category' => CategoryController::class,
     'article' => ArticleController::class,
     'menu' => MenuController::class,

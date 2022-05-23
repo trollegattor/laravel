@@ -8,15 +8,17 @@ use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use JetBrains\PhpStorm\Pure;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(): AnonymousResourceCollection
     {
         return ArticleResource::collection(Article::all());
     }
@@ -30,44 +32,35 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request): ArticleResource
     {
-        $article = Article::create([
+        $article = Article::query()->create([
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author' => $request->input('author'),
         ]);
+
         return new ArticleResource($article);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Article $article
      *
      * @return ArticleResource
      */
     public function show(Article $article): ArticleResource
     {
-       return new ArticleResource($article);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return new ArticleResource($article);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StoreArticleRequest $request
+     * @param Article $article
+     *
+     * @return ArticleResource
      */
     public function update(StoreArticleRequest $request, Article $article): ArticleResource
     {
@@ -77,16 +70,17 @@ class ArticleController extends Controller
             'content' => $request->input('content'),
             'author' => $request->input('author'),
         ]);
+
         return new ArticleResource($article);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Article $article
+     * @return bool
      */
-    public function destroy(Article $article)
+    public function destroy(Article $article): bool
     {
         return $article->delete();
     }
