@@ -6,37 +6,54 @@ use App\Models\Article;
 
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Null_;
+use function Symfony\Component\Translation\t;
 
 class CategoryController extends Controller
 {
+
     public function show()
     {
-        $category = Category::where('name','News')->value('id');
+        $oleg=new User();
+        $oleg->setAge(30);
+        $oleg->addAge(10);
 
-        echo gettype($category);
-        echo $category;
+        $oleg->name='oleg';
+        return [$oleg->age, $oleg->name];
+    }
 
-    }
-    public function result(Request $request)
-    {
-        $title=$request->input('title');
-        //echo $title;
-        $slug=$request->input('slug');
-        return view('code.result',[
-             'title'=>$title,
-            'slug'=>$slug
-        ]);
-    }
-    public function form(Request $request)
-    {
-        if ($request->has('title') and $request->has('slug')) {
-            //dump($request->input('title'));
-            //dump($request->input('slug'));
-            echo $request->method();
-            print_r($request->all());
-        }
-        return view('code.form');
 
-    }
 }
+class User
+{
+    public $name;
+    public $age;
+    public function isAgeCorrect($age)
+    {
+        if ($age>=18 and $age<60)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public function setAge($age)
+    {
+        if ($this->isAgeCorrect($age))
+        {
+            $this->age=$age;
+        }
+    }
+    public function addAge($years)
+    {
+        $newAge=$this->age+$years;
+        if($this->isAgeCorrect($newAge))
+        {
+          $this->age=$newAge;
+        }
+    }
 
+
+
+}

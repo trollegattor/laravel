@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86a8ef018777da6980f6457e22b342ac",
+    "content-hash": "50aff94319953296a5513f547850a9a6",
     "packages": [
         {
             "name": "brick/math",
@@ -65,6 +65,153 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "cocur/slugify",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cocur/slugify.git",
+                "reference": "2611e6081dbbb05837a16ed339c0451923d4046e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/2611e6081dbbb05837a16ed339c0451923d4046e",
+                "reference": "2611e6081dbbb05837a16ed339c0451923d4046e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.1"
+            },
+            "conflict": {
+                "symfony/config": "<3.4 || >=4,<4.3",
+                "symfony/dependency-injection": "<3.4 || >=4,<4.3",
+                "symfony/http-kernel": "<3.4 || >=4,<4.3",
+                "twig/twig": "<2.12.1"
+            },
+            "require-dev": {
+                "laravel/framework": "^5.0|^6.0|^7.0|^8.0",
+                "latte/latte": "~2.2",
+                "league/container": "^2.2.0",
+                "mikey179/vfsstream": "~1.6.8",
+                "mockery/mockery": "^1.3",
+                "nette/di": "~2.4",
+                "pimple/pimple": "~1.1",
+                "plumphp/plum": "~0.1",
+                "symfony/config": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^3.4 || ^4.3 || ^5.0 || ^6.0",
+                "symfony/phpunit-bridge": "^5.4 || ^6.0",
+                "twig/twig": "^2.12.1 || ~3.0",
+                "zendframework/zend-modulemanager": "~2.2",
+                "zendframework/zend-servicemanager": "~2.2",
+                "zendframework/zend-view": "~2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cocur\\Slugify\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Florian Eckerstorfer",
+                    "email": "florian@eckerstorfer.co",
+                    "homepage": "https://florian.ec"
+                },
+                {
+                    "name": "Ivo Bathke",
+                    "email": "ivo.bathke@gmail.com"
+                }
+            ],
+            "description": "Converts a string into a slug.",
+            "keywords": [
+                "slug",
+                "slugify"
+            ],
+            "support": {
+                "issues": "https://github.com/cocur/slugify/issues",
+                "source": "https://github.com/cocur/slugify/tree/v4.1.0"
+            },
+            "time": "2022-01-11T20:51:10+00:00"
+        },
+        {
+            "name": "cviebrock/eloquent-sluggable",
+            "version": "9.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cviebrock/eloquent-sluggable.git",
+                "reference": "3100e37682491424dd13eaeb3ec33cbbad186992"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/3100e37682491424dd13eaeb3ec33cbbad186992",
+                "reference": "3100e37682491424dd13eaeb3ec33cbbad186992",
+                "shasum": ""
+            },
+            "require": {
+                "cocur/slugify": "^4.0",
+                "illuminate/config": "^9.0",
+                "illuminate/database": "^9.0",
+                "illuminate/support": "^9.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "limedeck/phpunit-detailed-printer": "^6.0",
+                "mockery/mockery": "^1.4.2",
+                "orchestra/database": "^7.0",
+                "orchestra/testbench": "^7.0",
+                "phpunit/phpunit": "^9.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Cviebrock\\EloquentSluggable\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cviebrock\\EloquentSluggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Colin Viebrock",
+                    "email": "colin@viebrock.ca"
+                }
+            ],
+            "description": "Easy creation of slugs for your Eloquent models in Laravel",
+            "homepage": "https://github.com/cviebrock/eloquent-sluggable",
+            "keywords": [
+                "eloquent",
+                "eloquent-sluggable",
+                "laravel",
+                "lumen",
+                "slug",
+                "sluggable"
+            ],
+            "support": {
+                "issues": "https://github.com/cviebrock/eloquent-sluggable/issues",
+                "source": "https://github.com/cviebrock/eloquent-sluggable/tree/9.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cviebrock",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-25T02:55:58+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -143,16 +290,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "2.1.1",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce"
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/331b4d5dbaeab3827976273e9356b3b453c300ce",
-                "reference": "331b4d5dbaeab3827976273e9356b3b453c300ce",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/1ca8f21980e770095a31456042471a57bc4c68fb",
+                "reference": "1ca8f21980e770095a31456042471a57bc4c68fb",
                 "shasum": ""
             },
             "require": {
@@ -162,18 +309,12 @@
                 "doctrine/common": ">2.2,<2.4"
             },
             "require-dev": {
-                "alcaeus/mongo-php-adapter": "^1.1",
                 "cache/integration-tests": "dev-master",
-                "doctrine/coding-standard": "^8.0",
-                "mongodb/mongodb": "^1.1",
-                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
-                "predis/predis": "~1.0",
+                "doctrine/coding-standard": "^9",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0",
-                "symfony/cache": "^4.4 || ^5.2 || ^6.0@dev",
-                "symfony/var-exporter": "^4.4 || ^5.2 || ^6.0@dev"
-            },
-            "suggest": {
-                "alcaeus/mongo-php-adapter": "Required to use legacy MongoDB driver"
+                "symfony/cache": "^4.4 || ^5.4 || ^6",
+                "symfony/var-exporter": "^4.4 || ^5.4 || ^6"
             },
             "type": "library",
             "autoload": {
@@ -222,7 +363,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/cache/issues",
-                "source": "https://github.com/doctrine/cache/tree/2.1.1"
+                "source": "https://github.com/doctrine/cache/tree/2.2.0"
             },
             "funding": [
                 {
@@ -238,7 +379,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-07-17T14:49:29+00:00"
+            "time": "2022-05-20T20:07:39+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -1242,16 +1383,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.12.2",
+            "version": "v9.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b5b5c635f1a93f277b5248725a1f7ffc97e20810"
+                "reference": "5356f15d008c1b23088ccf21a5fb4aa2f87af034"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b5b5c635f1a93f277b5248725a1f7ffc97e20810",
-                "reference": "b5b5c635f1a93f277b5248725a1f7ffc97e20810",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5356f15d008c1b23088ccf21a5fb4aa2f87af034",
+                "reference": "5356f15d008c1b23088ccf21a5fb4aa2f87af034",
                 "shasum": ""
             },
             "require": {
@@ -1417,7 +1558,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-05-11T13:38:26+00:00"
+            "time": "2022-05-24T14:03:46+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1486,16 +1627,16 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "9e4b005daa20b0c161f3845040046dc9ddc1d74e"
+                "reference": "09f0e9fb61829f628205b7c94906c28740ff9540"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/9e4b005daa20b0c161f3845040046dc9ddc1d74e",
-                "reference": "9e4b005daa20b0c161f3845040046dc9ddc1d74e",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/09f0e9fb61829f628205b7c94906c28740ff9540",
+                "reference": "09f0e9fb61829f628205b7c94906c28740ff9540",
                 "shasum": ""
             },
             "require": {
@@ -1541,7 +1682,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2022-02-11T19:23:53+00:00"
+            "time": "2022-05-16T17:09:47+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -5796,16 +5937,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.14.4",
+            "version": "v1.14.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "0e0e51f19c758c79acbda11e3870641fbad5b7d9"
+                "reference": "c049316f9bcb02598607307f18b514b66202b639"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/0e0e51f19c758c79acbda11e3870641fbad5b7d9",
-                "reference": "0e0e51f19c758c79acbda11e3870641fbad5b7d9",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/c049316f9bcb02598607307f18b514b66202b639",
+                "reference": "c049316f9bcb02598607307f18b514b66202b639",
                 "shasum": ""
             },
             "require": {
@@ -5852,7 +5993,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-05-12T12:53:10+00:00"
+            "time": "2022-05-21T17:14:14+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -6730,16 +6871,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.20",
+            "version": "9.5.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "12bc8879fb65aef2138b26fc633cb1e3620cffba"
+                "reference": "c814a05837f2edb0d1471d6e3f4ab3501ca3899a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/12bc8879fb65aef2138b26fc633cb1e3620cffba",
-                "reference": "12bc8879fb65aef2138b26fc633cb1e3620cffba",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c814a05837f2edb0d1471d6e3f4ab3501ca3899a",
+                "reference": "c814a05837f2edb0d1471d6e3f4ab3501ca3899a",
                 "shasum": ""
             },
             "require": {
@@ -6755,7 +6896,7 @@
                 "phar-io/version": "^3.0.2",
                 "php": ">=7.3",
                 "phpspec/prophecy": "^1.12.1",
-                "phpunit/php-code-coverage": "^9.2.13",
+                "phpunit/php-code-coverage": "^9.2.7",
                 "phpunit/php-file-iterator": "^3.0.5",
                 "phpunit/php-invoker": "^3.1.1",
                 "phpunit/php-text-template": "^2.0.3",
@@ -6769,7 +6910,7 @@
                 "sebastian/global-state": "^5.0.1",
                 "sebastian/object-enumerator": "^4.0.3",
                 "sebastian/resource-operations": "^3.0.3",
-                "sebastian/type": "^3.0",
+                "sebastian/type": "^2.3.4",
                 "sebastian/version": "^3.0.2"
             },
             "require-dev": {
@@ -6817,11 +6958,11 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.20"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.10"
             },
             "funding": [
                 {
-                    "url": "https://phpunit.de/sponsors.html",
+                    "url": "https://phpunit.de/donate.html",
                     "type": "custom"
                 },
                 {
@@ -6829,7 +6970,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-01T12:37:26+00:00"
+            "time": "2021-09-25T07:38:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -7688,28 +7829,28 @@
         },
         {
             "name": "sebastian/type",
-            "version": "3.0.0",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "b233b84bc4465aff7b57cf1c4bc75c86d00d6dad"
+                "reference": "b8cd8a1c753c90bc1a0f5372170e3e489136f914"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/b233b84bc4465aff7b57cf1c4bc75c86d00d6dad",
-                "reference": "b233b84bc4465aff7b57cf1c4bc75c86d00d6dad",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/b8cd8a1c753c90bc1a0f5372170e3e489136f914",
+                "reference": "b8cd8a1c753c90bc1a0f5372170e3e489136f914",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^9.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -7732,7 +7873,7 @@
             "homepage": "https://github.com/sebastianbergmann/type",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
-                "source": "https://github.com/sebastianbergmann/type/tree/3.0.0"
+                "source": "https://github.com/sebastianbergmann/type/tree/2.3.4"
             },
             "funding": [
                 {
@@ -7740,7 +7881,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-15T09:54:48+00:00"
+            "time": "2021-06-15T12:49:02+00:00"
         },
         {
             "name": "sebastian/version",
@@ -8148,7 +8289,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0.2"
+        "php": "^8.1.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

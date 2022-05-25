@@ -26,4 +26,9 @@ class StoreArticlesTest extends TestCase
         $response->assertJsonStructure();
         $response->assertJson(['data' => $article]);
     }
+    public function testBasicTest()
+    {
+        $responce=$this->get('/api/category');
+        $responce->assertStatus(200);
+    }
 }
