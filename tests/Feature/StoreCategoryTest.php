@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Category;
 class StoreCategoryTest extends TestCase
 {
+
     /**
      * A basic feature test example.
      *
@@ -15,17 +16,20 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreSuccessfully()
     {
+
         $faker = app(\Faker\Generator::class);
-
-
         $category=[
             'name' => $faker->name(),
             'type' => 'multiple',
             'parent_id'=>null,
             ];
         //Category::factory()->count(10)->create();
-        $response = $this->post('/api/category',$category,);
+        //$responseGet = $this->get('/api/category',$category,);
+        //$responseGet->assertOk();
+        //$responseGet->assertSessionDoesntHaveErrors();
+        //$responseGet->assertStatus(200);
+        $this->post('/api/category',$category,);
+        $this->assertDatabaseHas('categories',['type' => 'multiple']);
 
-        $response->assertOk();
     }
 }
