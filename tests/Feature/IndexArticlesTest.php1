@@ -14,9 +14,9 @@ class IndexArticlesTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    /*public function test_example()
     {
-        $this->get('/api/article/1')->assertStatus(200);
+        $this->get('/api/article')->assertStatus(200);
 
-    }
+    }*/
 }

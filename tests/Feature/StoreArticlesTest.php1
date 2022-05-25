@@ -39,5 +39,5 @@ class StoreArticlesTest extends TestCase
     {
         $responce=$this->get('/api/category');
         $responce->assertStatus(200);
-    }
+    }*/
 }

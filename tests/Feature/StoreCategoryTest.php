@@ -14,7 +14,24 @@ class StoreCategoryTest extends TestCase
      *
      * @return void
      */
-    public function testCategoryStoreSuccessfully()
+    public function testExample()
+    {
+        $faker = app(\Faker\Generator::class);
+        $category=[
+            'name' => $faker->name(),
+            'type' => 'multiple',
+            'parent_id'=>null,
+        ];
+        Category::factory()->count(10)->create();
+
+
+        $response=$this->post('/api/category',$category);
+
+        $response->assertCreated();
+        //dd($response->getContent());
+
+    }
+   /* public function testCategoryStoreSuccessfully()
     {
 
         $faker = app(\Faker\Generator::class);
@@ -31,5 +48,5 @@ class StoreCategoryTest extends TestCase
         $this->post('/api/category',$category,);
         $this->assertDatabaseHas('categories',['type' => 'multiple']);
 
-    }
+    }*/
 }
