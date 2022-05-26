@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class StoreCategoryTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
     /**
      * A basic feature test example.
      *
@@ -16,30 +16,18 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreCreate()
     {
-        $faker = app(\Faker\Generator::class);
         $category = [
-            'name' => $faker->name(),
+            'name' => 'Sport News',
             'type' => 'multiple',
             'parent_id' => null,
             ];
-        $response = $this->post('/api/category', $category);
-        $response->assertCreated();
-    }
-
-    /**
-     * @return void
-     */
-    public function testCategoryStoreValid()
-    {
-        $faker = app(\Faker\Generator::class);
-        $category = [
-            'name' => $faker->name(),
-            'type' => 'multiple',
-            'parent_id' => null,
-            ];
-        $response = $this->postJson('/api/category', $category);
-        $response->dumpSession();
-        $response->assertJson(['data'=>$category]);
+        $this->post('/api/category', $category)
+            ->assertExactJson(['data'=>[
+                'id'=>1,
+                'name' => 'Sport News',
+                'type' => 'multiple',
+                'parent_id' => null,
+            ]]);
     }
 
     /**
@@ -47,17 +35,18 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreFailedValid()
     {
-        $faker = app(\Faker\Generator::class);
         $category = [
             'name' => null,
             'type' => null,
-            'parent_id' => 22,
+            'parent_id' => 'error',
             ];
-        $response = $this->postJson('/api/category', $category);
-        $response->dump();
-        $response->assertJsonValidationErrors('name');
-        //$response->assertJsonValidationErrors('name');
-        //$response->assertJsonValidationErrors('parent_id');
-        $a='https://laravel.demiart.ru/test-refactoring/';
+        $this->postJson('/api/category', $category)
+            ->dump()
+            ->assertJsonValidationErrors('name')
+            ->assertJsonValidationErrors('type')
+            ->assertJsonValidationErrors('parent_id');
+
+
+
     }
 }
