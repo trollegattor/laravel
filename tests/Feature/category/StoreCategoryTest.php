@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class StoreCategoryTest extends TestCase
 {
-
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      *
@@ -37,7 +37,8 @@ class StoreCategoryTest extends TestCase
             'type' => 'multiple',
             'parent_id' => null,
             ];
-        $response = $this->post('/api/category', $category);
+        $response = $this->postJson('/api/category', $category);
+        $response->dumpSession();
         $response->assertJson(['data'=>$category]);
     }
 
@@ -48,11 +49,15 @@ class StoreCategoryTest extends TestCase
     {
         $faker = app(\Faker\Generator::class);
         $category = [
-            'name' => $faker->name(),
-            'type' => 'error',
-            'parent_id' => null,
+            'name' => null,
+            'type' => null,
+            'parent_id' => 22,
             ];
-        $response = $this->post('/api/category', $category);
-        $response->assertJsonValidationErrors();
+        $response = $this->postJson('/api/category', $category);
+        $response->dump();
+        $response->assertJsonValidationErrors('name');
+        //$response->assertJsonValidationErrors('name');
+        //$response->assertJsonValidationErrors('parent_id');
+        $a='https://laravel.demiart.ru/test-refactoring/';
     }
 }
