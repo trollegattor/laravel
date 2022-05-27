@@ -5,12 +5,8 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-<<<<<<< HEAD
-        "php": "^8.1.1",
+        "php": "^8.1.0",
         "cviebrock/eloquent-sluggable": "^9.0",
-=======
-        "php": "^8.1.4",
->>>>>>> 8133d1c80ce7c7c460800b1da64b5ae30f42370c
         "doctrine/dbal": "^3.3",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
