@@ -33,6 +33,7 @@ class StudyController extends Controller
     {
         $oleg=new Study();
 
+
         return $oleg->nameage('oleg',1);
     }
 }
