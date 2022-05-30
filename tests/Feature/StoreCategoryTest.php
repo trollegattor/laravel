@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Faker\Generator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -16,7 +17,7 @@ class StoreCategoryTest extends TestCase
      */
     public function testExample()
     {
-        $faker = app(\Faker\Generator::class);
+        $faker = app(Generator::class);
         $category=[
             'name' => $faker->name(),
             'type' => 'multiple',
@@ -31,22 +32,23 @@ class StoreCategoryTest extends TestCase
         //dd($response->getContent());
 
     }
-   /* public function testCategoryStoreSuccessfully()
+
+    public function testCategoryStoreSuccessfully()
     {
 
-        $faker = app(\Faker\Generator::class);
+        $faker = app(Generator::class);
         $category=[
             'name' => $faker->name(),
             'type' => 'multiple',
             'parent_id'=>null,
             ];
         //Category::factory()->count(10)->create();
-        //$responseGet = $this->get('/api/category',$category,);
+        $responseGet = $this->get('/api/category',$category,);
         //$responseGet->assertOk();
         //$responseGet->assertSessionDoesntHaveErrors();
         //$responseGet->assertStatus(200);
         $this->post('/api/category',$category,);
         $this->assertDatabaseHas('categories',['type' => 'multiple']);
 
-    }*/
+    }
 }

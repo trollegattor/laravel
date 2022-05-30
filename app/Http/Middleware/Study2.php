@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Article;
 use Closure;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 
@@ -22,13 +23,11 @@ class Study2
         /*if ($request->input('token') === 'my-secret-token') {
             return response('work/api/article',2024);
         }*/
-        $response=$next($request);
 
-        /*if ($request->session()->has('errors')) {
-            return response('error', 422);
-        }*/
+        $response = $next($request);
 
-        $data=$request->session()->all();
-        return response($data, 422);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }

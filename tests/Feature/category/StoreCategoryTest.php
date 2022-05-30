@@ -40,13 +40,13 @@ class StoreCategoryTest extends TestCase
             'type' => null,
             'parent_id' => 'error',
             ];
-        $this->postJson('/api/category', $category)
-            ->dump()
-            ->assertJsonValidationErrors('name')
-            ->assertJsonValidationErrors('type')
-            ->assertJsonValidationErrors('parent_id');
+        $response = $this->postJson('/api/category', $category)->json();
 
+        $errors = $response['errors'];
+        $nameErrorMessage = array_shift($errors['name']);
+        $typeErrorMessage = array_shift($errors['type']);
+        $parentIdErrorMessage = array_shift($errors['parent_id']);
 
-
+        $this->assertSame('The name field is required.', $nameErrorMessage);
     }
 }
