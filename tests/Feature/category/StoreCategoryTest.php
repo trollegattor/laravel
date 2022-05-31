@@ -40,7 +40,9 @@ class StoreCategoryTest extends TestCase
             'type' => null,
             'parent_id' => 'error',
             ];
+
         $response = $this->postJson('/api/category', $category)->json();
+        dd($response);
 
         $errors = $response['errors'];
         $nameErrorMessage = array_shift($errors['name']);

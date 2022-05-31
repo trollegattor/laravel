@@ -29,10 +29,10 @@ class Study
 class StudyController extends Controller
 {
 
-    public function show()
+    public function show(Request $request)
     {
+        dump($request);
         $oleg=new Study();
-
 
         return $oleg->nameage('oleg',1);
     }
