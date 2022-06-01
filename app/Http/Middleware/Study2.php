@@ -19,8 +19,7 @@ class Study2
     public function handle(Request $request, Closure $next)
     {
         $response = $next($request);
-        //$response->headers->set('Content-Type', 'application/json');
-        //$response->json();
+        $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
 }

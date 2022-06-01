@@ -15,7 +15,8 @@ class IndexCategoryTest extends TestCase
      */
     public function testCategoryIndexGet()
     {
-        $response = $this->get('/api/category');
+
+        $response = $this->getJson('/api/category');
         $response->assertOk();
     }
 }

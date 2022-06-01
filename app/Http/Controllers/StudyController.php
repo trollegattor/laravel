@@ -32,9 +32,11 @@ class StudyController extends Controller
     public function show(Request $request)
     {
         dump($request);
+        dump($request->headers->all());
+        print_r($request->headers->all());
         $oleg=new Study();
 
-        return $oleg->nameage('oleg',1);
+        return ;
     }
 }
 
