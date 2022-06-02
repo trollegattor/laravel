@@ -10,11 +10,11 @@ use Tests\TestCase;
 class ShowCategoryTest extends TestCase
 {
     public array $data=[
-        'id'=>1,
         'type' => Category::CATEGORY_TYPES['MULTI'],
         'name' => 'News',
         'parent_id'=>Category::PARENT_ID['NULL'],
         ];
+    use RefreshDatabase, WithFaker;
 
     /**
      * A basic feature test example.
@@ -24,13 +24,25 @@ class ShowCategoryTest extends TestCase
     public function testCategoryShowSuccessfulGet()
     {
         Category::query()->create($this->data);
+        Category::factory()->count(10)->create();
         $response = $this->getJson('/api/category/1');
         $response->assertStatus(200);
     }
-    /*public function testCategoryFailedShowGet()
+
+    /**
+     * @return void
+     *
+     */
+    public function testCategoryFailedShowGet()
     {
         Category::query()->create($this->data);
-        $response = $this->get('/api/category/3');
+        Category::factory()->count(10)->create();
+        $count=Category::query();
+        for($i=1; $count!==null; $i++)
+        {
+            $count=Category::query()->where('id','=',$i)->first();
+        }
+        $response = $this->getJson('/api/category/'.$i);
         $response->assertStatus(404);
-    }*/
+    }
 }
