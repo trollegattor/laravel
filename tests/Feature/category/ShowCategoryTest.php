@@ -25,8 +25,9 @@ class ShowCategoryTest extends TestCase
     {
         Category::query()->create($this->data);
         Category::factory()->count(10)->create();
-        $response = $this->getJson('/api/category/1');
-        $response->assertStatus(200);
+        $count=Category::query()->where('id','!=', null)->first();
+        $this->getJson('/api/category/'.$count->id)
+            ->assertStatus(200);
     }
 
     /**
@@ -43,6 +44,6 @@ class ShowCategoryTest extends TestCase
             $count=Category::query()->where('id','=',$i)->first();
         }
         $response = $this->getJson('/api/category/'.$i);
-        $response->assertStatus(404);
+        $response->assertNotFound();
     }
 }

@@ -14,11 +14,7 @@ class UpdateCategoryTest extends TestCase
         'name' => 'News',
         'parent_id' => Category::PARENT_ID['NULL'],
     ];
-    public array $newData = [
-        'type' => Category::CATEGORY_TYPES['MULTI'],
-        'name' => 'Sport',
-        'parent_id' => 1
-    ];
+
 
     use RefreshDatabase, WithFaker;
 
@@ -29,15 +25,26 @@ class UpdateCategoryTest extends TestCase
      */
     public function testCategoryUpdateSuccessful()
     {
-        $id = 2;
         Category::query()->create($this->data);
         Category::factory()->count(10)->create();
-        $response = $this->patchJson('/api/category/' . $id, $this->newData);
-        $response->assertExactJson(['data' => [
-            'id' => $id,
+        $parentId = Category::query()
+            ->where('name', '=', 'News')
+            ->first();
+        $newData = [
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'Sport',
-            'parent_id' => 1
-        ]]);
+            'parent_id' => $parentId->id
+        ];
+        $id = Category::query()
+            ->where('id', '!=', null)
+            ->where('name', '!=', 'News')
+            ->first();
+        $this->patchJson('/api/category/' . $id->id, $newData)
+            ->assertExactJson(['data' => [
+                'id' => $id->id,
+                'type' => Category::CATEGORY_TYPES['MULTI'],
+                'name' => 'Sport',
+                'parent_id' => $parentId->id,
+            ]]);
     }
 }

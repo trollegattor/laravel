@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class IndexCategoryTest extends TestCase
 {
+    use RefreshDatabase, WithFaker;
     /**
      * A basic feature test example.
      *

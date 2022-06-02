@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\category;
 
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -23,9 +24,12 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreCreate()
     {
+        $id = Category::query()
+            ->where('id')
+            ->count() ;
+        dump($id);
         $this->post('/api/category', $this->category)
             ->assertExactJson(['data' => [
-                'id' => 1,
                 'name' => 'Sport News',
                 'type' => 'multiple',
                 'parent_id' => null,

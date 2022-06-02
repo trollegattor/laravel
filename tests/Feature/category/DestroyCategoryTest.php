@@ -26,10 +26,9 @@ class DestroyCategoryTest extends TestCase
         $id = 2;
         Category::query()->create($this->data);
         Category::factory()->count(10)->create();
-        $response = $this->deleteJson('/api/category/' . $id);
-        dump($response);
-
-        $response->assertStatus(200);
-        $response->assertExactJson(['data' => []]);
+        $del=Category::query()->where('id',$id)->first();
+        $this->deleteJson('/api/category/' . $id)
+            ->assertStatus(200)
+            ->assertJsonMissing($del->attributesToArray());
     }
 }
