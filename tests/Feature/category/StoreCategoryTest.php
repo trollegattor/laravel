@@ -9,7 +9,12 @@ use Tests\TestCase;
 
 class StoreCategoryTest extends TestCase
 {
-    private array $category = [
+    private array $data = [
+        'type' => Category::CATEGORY_TYPES['MULTI'],
+        'name' => 'News',
+        'parent_id' => Category::PARENT_ID['NULL'],
+    ];
+    private array $newData = [
         'name' => 'Sport News',
         'type' => 'multiple',
         'parent_id' => null,
@@ -24,12 +29,14 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreCreate()
     {
+        Category::query()->create($this->data);
         $id = Category::query()
-            ->where('id')
-            ->count() ;
-        dump($id);
-        $this->post('/api/category', $this->category)
+            ->where('name', '=', 'News')
+            ->first();
+        $newId = $id->id + 1;
+        $this->post('/api/category', $this->newData)
             ->assertExactJson(['data' => [
+                'id' => $newId,
                 'name' => 'Sport News',
                 'type' => 'multiple',
                 'parent_id' => null,
@@ -41,7 +48,7 @@ class StoreCategoryTest extends TestCase
      */
     public function testCategoryStoreSuccessfulValid()
     {
-        $this->postJson('/api/category', $this->category)
+        $this->postJson('/api/category', $this->newData)
             ->assertJsonMissingValidationErrors(['name', 'type', 'parent_id']);
     }
 
@@ -79,7 +86,7 @@ class StoreCategoryTest extends TestCase
     public function testCategoryStoreFailedValidThird()
     {
         $category = [
-            'name' => $this->faker->realTextBetween(201,300),
+            'name' => $this->faker->realTextBetween(201, 300),
             'type' => 'error',
             'parent_id' => 1,
         ];
