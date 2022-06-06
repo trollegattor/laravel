@@ -21,14 +21,15 @@ class DestroyCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testCategoryDestroySuccessfull()
     {
-        $id = 2;
+
+
         Category::query()->create($this->data);
         Category::factory()->count(10)->create();
-        $del=Category::query()->where('id',$id)->first();
-        $this->deleteJson('/api/category/' . $id)
+        $id = Category::query()->where('id','!=',null)->first();
+        $this->deleteJson('/api/category/' . $id->id)
             ->assertStatus(200)
-            ->assertJsonMissing($del->attributesToArray());
+            ->assertJsonMissing($id->attributesToArray());
     }
 }

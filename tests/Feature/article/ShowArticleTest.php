@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\article;
 
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,10 +15,37 @@ class ShowArticleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testArticleShowSuccessfulGet()
     {
-        $response = $this->get('/');
+        $newsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
+        ]);
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        $count=Article::query()->where('id','!=', null)->first();
+        $this->getJson('/api/article/'.$count->id)
+            ->assertStatus(200);
+    }
 
-        $response->assertStatus(200);
+    /**
+     * @return void
+     */
+    public function testArticleShowFailedGet()
+    {
+        $newsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
+        ]);
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        $count=Article::query();
+        for($i=1; $count!==null; $i++) {
+            $count = Article::query()->where('id', '=', $i)->first();
+            $id=$i;
+        }
+        $this->getJson('/api/article/'.$id)
+            ->assertNotFound();
+
     }
 }

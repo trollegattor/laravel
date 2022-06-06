@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\article;
 
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,10 +15,19 @@ class DestroyArticleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testArticleDestroySuccessfull()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $newsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
+        ]);
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        $id = Article::query()
+            ->where('id', '!=', null)
+            ->first();
+        $this->deleteJson('/api/article/' . $id->id)
+            ->assertStatus(200)
+            ->assertJsonMissing($id->attributesToArray());
     }
 }

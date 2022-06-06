@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\article;
 
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -13,10 +15,30 @@ class UpdateArticleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testArticleUpdateSuccessful()
     {
-        $response = $this->get('/');
+        $newsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
+        ]);
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        $id = Article::query()
+            ->where('id', '!=', null)
+            ->first();
 
-        $response->assertStatus(200);
+        $this->patchJson('/api/article/'.$id->id,[
+                'category_id' => $newsCategory->id,
+                'title' => 'Last news',
+                'content' => 'Hello from Stepan',
+                'author' => Article::ARTICLE_AUTHOR['ADMIN'],
+            ])
+            ->assertJson(['data' => [
+                'id' => $id->id,
+                'category_id' => $newsCategory->id,
+                'title' => 'Last news',
+                'content' => 'Hello from Stepan',
+                'author' => Article::ARTICLE_AUTHOR['ADMIN'],
+            ]]);
     }
 }

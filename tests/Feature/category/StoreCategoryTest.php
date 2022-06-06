@@ -58,8 +58,6 @@ class StoreCategoryTest extends TestCase
     public function testCategoryStoreFailedValidFirst()
     {
         $category = [
-            'name' => null,
-            'type' => null,
             'parent_id' => 'error',
         ];
         $this->postJson('/api/category', $category)

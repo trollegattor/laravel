@@ -13,10 +13,9 @@ class IndexArticleTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testArticleIndexGet()
     {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $this->getJson('/api/article')
+        ->assertOk();
     }
 }

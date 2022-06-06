@@ -73,4 +73,48 @@ class StoreMenuTest extends TestCase
             ])
             ->assertJsonMissingValidationErrors(['category_id', 'title']);
     }
+
+    /**
+     * @return void
+     */
+    public function testCategoryStoreFailedValidFirst()
+    {
+        $newsCategory = Category::query()->create
+        ([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id'=>Category::PARENT_ID['NULL'],
+        ]);
+        $this->postJson('/api/menu',[])
+            ->assertJsonValidationErrors(['category_id', 'title']);
+    }
+    public function testCategoryStoreFailedValidSecond()
+    {
+        $newsCategory = Category::query()->create
+        ([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id' => Category::PARENT_ID['NULL'],
+        ]);
+        $this->postJson('/api/menu', [
+            'category_id' => $newsCategory->id + 1,
+            'title' => 123456
+        ])
+            ->assertJsonValidationErrors(['category_id', 'title']);
+    }
+    public function testCategoryStoreFailedValidThird()
+    {
+        $newsCategory = Category::query()->create
+        ([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id' => Category::PARENT_ID['NULL'],
+        ]);
+        $this->postJson('/api/menu', [
+            'category_id' => $newsCategory->id ,
+            'title' => $this->faker->realTextBetween(201, 300)
+        ])
+            ->assertJsonValidationErrors(['title']);
+    }
+
 }
