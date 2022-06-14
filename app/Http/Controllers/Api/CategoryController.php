@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Services\CategoryService\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class CategoryController extends Controller
 {
@@ -15,9 +17,11 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(CategoryService $categoryService)
     {
-        return CategoryResource::collection(Category::all());
+        $categories = $categoryService->getAll();
+
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -26,14 +30,16 @@ class CategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request): CategoryResource
+    public function store(StoreCategoryRequest $request,CategoryService $categoryService): CategoryResource
     {
-        $category = Category::create([
+        $data = [
             'name' => $request->input('name'),
             'type' => $request->input('type'),
-            'parent_id' => $request->input('parent_id')
-        ]);
-        return new CategoryResource($category);
+            'parent_id' => $request->input('parent_id'),
+        ];
+        $newCategory=$categoryService->create($data);
+
+        return new CategoryResource($newCategory);
     }
 
     /**
@@ -42,9 +48,11 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category): CategoryResource
+    public function show(int $id, CategoryService $categoryService): CategoryResource
     {
-        return new CategoryResource($category);
+        $model=$categoryService->show($id);
+
+        return new CategoryResource($model);
     }
 
     /**
@@ -54,14 +62,16 @@ class CategoryController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryRequest $request, Category $category): CategoryResource
+    public function update(StoreCategoryRequest $request, Category $category,CategoryService $categoryService): CategoryResource
     {
-        $category->update([
+        $data=[
             'name' => $request->input('name'),
             'type' => $request->input('type'),
             'parent_id' => $request->input('parent_id')
-        ]);
-        return new CategoryResource($category);
+        ];
+        $updateCategory=$categoryService->update($category,$data);
+
+        return new CategoryResource($updateCategory);
     }
 
     /**
@@ -70,8 +80,8 @@ class CategoryController extends Controller
      * @param int $id
      * @return bool
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, CategoryService $categoryService): bool
     {
-        return $category->delete();
+        return $categoryService->destroy($category);
     }
 }

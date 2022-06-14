@@ -22,11 +22,7 @@ use App\Http\Middleware\Study;
     return $request->user();
 });*/
 Route::apiResources(['category' => CategoryController::class]);
-
-
-Route::apiResources([
-    'article' => ArticleController::class,
-    'menu' => MenuController::class,
-]);
+Route::apiResources(['article' => ArticleController::class,]);
+Route::apiResources(['menu' => MenuController::class,]);
 
 
