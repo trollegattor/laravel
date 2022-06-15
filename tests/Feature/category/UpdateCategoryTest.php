@@ -14,8 +14,6 @@ class UpdateCategoryTest extends TestCase
         'name' => 'News',
         'parent_id' => Category::PARENT_ID['NULL'],
     ];
-
-
     use RefreshDatabase, WithFaker;
 
     /**

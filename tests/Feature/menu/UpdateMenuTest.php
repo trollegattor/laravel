@@ -4,15 +4,11 @@ namespace Tests\Feature\menu;
 
 use App\Models\Category;
 use App\Models\Menu;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UpdateMenuTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
      * @return void
      */
     public function testMenuUpdateSuccessful()
@@ -20,22 +16,22 @@ class UpdateMenuTest extends TestCase
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $firstSubCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'About Ukraine',
-            'parent_id'=> $newsCategory->id,
+            'parent_id' => $newsCategory->id,
         ]);
         $aboutUsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
             'name' => 'About us',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $contactsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
             'name' => 'Contacts',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $aboutUsMenu = Menu::query()->create([
             'category_id' => $aboutUsCategory->id,
@@ -44,7 +40,7 @@ class UpdateMenuTest extends TestCase
         Menu::factory()->count(10)->create([
             'category_id' => $aboutUsCategory->id,
         ]);
-        $newData=[
+        $newData = [
             'category_id' => $contactsCategory->id,
             'title' => 'New contacts',
         ];
@@ -59,6 +55,4 @@ class UpdateMenuTest extends TestCase
                 'title' => 'New contacts',
             ]]);
     }
-
-
 }

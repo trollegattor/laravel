@@ -6,82 +6,90 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
-use http\Env\Response;
-use Illuminate\Http\Request;
+use App\Services\ArticleService\ArticleService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use JetBrains\PhpStorm\Pure;
+use Throwable;
+
 
 class ArticleController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
+     * @param ArticleService $articleService
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(ArticleService $articleService): AnonymousResourceCollection
     {
-        return ArticleResource::collection(Article::all());
+        $articles = $articleService->getAll();
+
+        return ArticleResource::collection($articles);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param StoreArticleRequest $request
-     *
+     * @param ArticleService $articleService
      * @return ArticleResource
      */
-    public function store(StoreArticleRequest $request): ArticleResource
+    public function store(StoreArticleRequest $request, ArticleService $articleService): ArticleResource
     {
-        $article = Article::query()->create([
+        $data = [
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author' => $request->input('author'),
-        ]);
+        ];
+        $newArticle = $articleService->create($data);
 
-        return new ArticleResource($article);
+        return new ArticleResource($newArticle);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Article $article
-     *
+     * @param int $id
+     * @param ArticleService $articleService
      * @return ArticleResource
      */
-    public function show(Article $article): ArticleResource
+    public function show(int $id, ArticleService $articleService): ArticleResource
     {
-        return new ArticleResource($article);
+        $model = $articleService->show($id);
+
+        return new ArticleResource($model);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param StoreArticleRequest $request
-     * @param Article $article
-     *
+     * @param int $id
+     * @param ArticleService $articleService
      * @return ArticleResource
      */
-    public function update(StoreArticleRequest $request, Article $article): ArticleResource
+    public function update(StoreArticleRequest $request, int $id, ArticleService $articleService): ArticleResource
     {
-        $article->update([
+        $data = [
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'author' => $request->input('author'),
-        ]);
+        ];
+        $updateArticle = $articleService->update($id, $data);
 
-        return new ArticleResource($article);
+        return new ArticleResource($updateArticle);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Article $article
+     * @param int $id
+     * @param ArticleService $articleService
      * @return bool
+     * @throws Throwable
      */
-    public function destroy(Article $article): bool
+    public function destroy(int $id, ArticleService $articleService): ?bool
     {
-        return $article->delete();
+        return $articleService->destroy($id);
     }
 }

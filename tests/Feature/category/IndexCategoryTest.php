@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\category;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -9,14 +9,13 @@ use Tests\TestCase;
 class IndexCategoryTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
     /**
-     * A basic feature test example.
-     *
      * @return void
      */
     public function testCategoryIndexGet()
     {
-        $response = $this->getJson('/api/category');
-        $response->assertOk();
+         $this->getJson('/api/category')
+             ->assertOk();
     }
 }

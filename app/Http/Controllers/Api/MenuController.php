@@ -6,70 +6,77 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMenuRequest;
 use App\Http\Resources\MenuResource;
 use App\Models\Menu;
+use App\Services\MenuService\MenuService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Throwable;
 
 class MenuController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param MenuService $menuService
+     * @return AnonymousResourceCollection
      */
-    public function index()
+    public function index(MenuService $menuService): AnonymousResourceCollection
     {
-        return MenuResource::collection(Menu::all());
+        $menu = $menuService->getAll();
+
+        return MenuResource::collection($menu);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param StoreMenuRequest $request
+     * @param MenuService $menuService
+     * @return MenuResource
      */
-    public function store(StoreMenuRequest $request): MenuResource
+    public function store(StoreMenuRequest $request, MenuService $menuService): MenuResource
     {
-        $menu = Menu::create([
+        $data = [
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
-        ]);
-        return new MenuResource($menu);
+        ];
+        $newMenu = $menuService->create($data);
+
+        return new MenuResource($newMenu);
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param MenuService $menuService
+     * @return MenuResource
      */
-    public function show(Menu $menu): MenuResource
+    public function show(int $id, MenuService $menuService): MenuResource
     {
-        return new MenuResource($menu);
+        $model = $menuService->show($id);
+
+        return new MenuResource($model);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
+     * @param StoreMenuRequest $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param MenuService $menuService
+     * @return MenuResource
      */
-    public function update(StoreMenuRequest $request, Menu $menu): MenuResource
+    public function update(StoreMenuRequest $request, int $id, MenuService $menuService): MenuResource
     {
-        $menu->update([
+        $data = [
             'category_id' => $request->input('category_id'),
             'title' => $request->input('title'),
-        ]);
-        return new MenuResource($menu);
+        ];
+        $updateMenu = $menuService->update($id, $data);
+
+        return new MenuResource($updateMenu);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param MenuService $menuService
+     * @return bool|null
+     * @throws Throwable
      */
-    public function destroy(Menu $menu)
+    public function destroy(int $id, MenuService $menuService): ?bool
     {
-        return $menu->delete();
+        return $menuService->destroy($id);
     }
 }

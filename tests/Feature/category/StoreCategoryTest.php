@@ -22,9 +22,6 @@ class StoreCategoryTest extends TestCase
     use RefreshDatabase, WithFaker;
 
     /**
-     * A basic feature test example.
-     *
-     * @param $category
      * @return void
      */
     public function testCategoryStoreCreate()

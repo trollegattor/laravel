@@ -7,7 +7,7 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Article>
+ * @extends Factory
  */
 class ArticleFactory extends Factory
 {
@@ -17,9 +17,9 @@ class ArticleFactory extends Factory
     protected $model = Article::class;
 
     /**
-     * @inheritDoc
+     * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'category_id' => Category::factory(),

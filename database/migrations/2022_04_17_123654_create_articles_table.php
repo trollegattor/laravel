@@ -27,6 +27,7 @@ class CreateArticlesTable extends Migration
                 ->cascadeOnDelete();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -36,4 +37,4 @@ class CreateArticlesTable extends Migration
     {
         Schema::dropIfExists('articles');
     }
-};
+}

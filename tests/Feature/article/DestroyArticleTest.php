@@ -5,23 +5,21 @@ namespace Tests\Feature\article;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class DestroyArticleTest extends TestCase
 {
+    use RefreshDatabase;
     /**
-     * A basic feature test example.
-     *
      * @return void
      */
-    public function testArticleDestroySuccessfull()
+    public function testArticleDestroySuccessfully()
     {
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
-        ]);
+            'parent_id' => Category::PARENT_ID['NULL'],
+            ]);
         Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
         $id = Article::query()
             ->where('id', '!=', null)

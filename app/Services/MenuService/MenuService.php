@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services\CategoryService;
+namespace App\Services\MenuService;
 
-use App\Models\Category;
+use App\Models\Menu;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Throwable;
 
-class CategoryService
+class MenuService
 {
 
     /**
@@ -16,7 +16,7 @@ class CategoryService
      */
     public function getAll(): Collection
     {
-        return Category::all();
+        return Menu::all();
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryService
      */
     public function create($data): Model|Builder
     {
-        return Category::query()->create($data);
+        return Menu::query()->create($data);
     }
 
     /**
@@ -35,7 +35,7 @@ class CategoryService
      */
     public function update($id, $data): Model|Collection|Builder|array|null
     {
-        $model = Category::query()->findOrFail($id);
+        $model = Menu::query()->findOrFail($id);
         $model->update($data);
 
         return $model;
@@ -47,7 +47,7 @@ class CategoryService
      */
     public function show(int $id): Model|Collection|Builder|array|null
     {
-        return Category::query()->findOrFail($id);
+        return Menu::query()->findOrFail($id);
     }
 
     /**
@@ -57,7 +57,7 @@ class CategoryService
      */
     public function destroy(int $id): ?bool
     {
-        $model = Category::query()->findOrFail($id);
+        $model = Menu::query()->findOrFail($id);
 
         return $model->deleteOrFail();
     }

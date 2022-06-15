@@ -13,6 +13,7 @@ class ShowCategoryTest extends TestCase
         'type' => Category::CATEGORY_TYPES['MULTI'],
         'name' => 'News',
         'parent_id'=>Category::PARENT_ID['NULL'],
+
         ];
     use RefreshDatabase, WithFaker;
 

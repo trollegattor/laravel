@@ -4,7 +4,6 @@ namespace Tests\Feature\article;
 
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Menu;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -12,6 +11,7 @@ use Tests\TestCase;
 class StoreArticleTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
     /**
      * A basic feature test example.
      *
@@ -22,12 +22,12 @@ class StoreArticleTest extends TestCase
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $aboutUsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['SINGLE'],
             'name' => 'About us',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
         $this->post('/api/article', [
@@ -52,7 +52,7 @@ class StoreArticleTest extends TestCase
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $this->postJson('/api/article', [
             'category_id' => $newsCategory->id,
@@ -62,8 +62,8 @@ class StoreArticleTest extends TestCase
         ])
             ->assertJsonMissingValidationErrors([
                 'category_id',
-                'title' ,
-                'content' ,
+                'title',
+                'content',
                 'author'
             ]);
     }
@@ -76,27 +76,31 @@ class StoreArticleTest extends TestCase
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $this->postJson('/api/article', [])
             ->assertJsonValidationErrors([
                 'category_id',
-                'title' ,
-                'content' ,
+                'title',
+                'content',
                 'author'
             ]);
     }
+
+    /**
+     * @return void
+     */
     public function testArticleStoreFailedValidSecond()
     {
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
-        $count=Category::query();
-        for($i=1; $count!==null; $i++) {
+        $count = Category::query();
+        for ($i = 1; $count !== null; $i++) {
             $count = Category::query()->where('id', '=', $i)->first();
-            $id=$i;
+            $id = $i;
         }
         $this->postJson('/api/article', [
             'category_id' => $id,
@@ -106,17 +110,21 @@ class StoreArticleTest extends TestCase
         ])
             ->assertJsonValidationErrors([
                 'category_id',
-                'title' ,
-                'content' ,
+                'title',
+                'content',
                 'author'
             ]);
     }
+
+    /**
+     * @return void
+     */
     public function testArticleStoreFailedValidThird()
     {
         $newsCategory = Category::query()->create([
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
-            'parent_id'=>Category::PARENT_ID['NULL'],
+            'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $this->postJson('/api/article', [
             'category_id' => $newsCategory->id,
@@ -125,10 +133,9 @@ class StoreArticleTest extends TestCase
             'author' => 'error',
         ])
             ->assertJsonValidationErrors([
-                'title' ,
-                'content' ,
+                'title',
+                'content',
                 'author'
             ]);
     }
-
 }
