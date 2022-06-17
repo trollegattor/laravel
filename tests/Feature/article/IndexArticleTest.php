@@ -14,4 +14,13 @@ class IndexArticleTest extends TestCase
         $this->getJson('/api/article')
             ->assertOk();
     }
+
+    /**
+     * @return void
+     */
+    public function testArticleIndexGetFailed()
+    {
+        $this->getJson('/api/error')
+            ->assertNotFound();
+    }
 }

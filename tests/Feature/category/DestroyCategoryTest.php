@@ -28,4 +28,22 @@ class DestroyCategoryTest extends TestCase
             ->assertStatus(200)
             ->assertJsonMissing($id->attributesToArray());
     }
+
+    /**
+     * @return void
+     */
+    public function testCategoryDestroyFailed()
+    {
+        Category::query()->create($this->data);
+        Category::factory()->count(10)->create();
+        $count=Category::query();
+        for($i=1; $count!==null; $i++)
+        {
+            $count=Category::query()->where('id','=',$i)->first();
+            $id=$i;
+        }
+        $this->deleteJson('/api/category/' . $id)
+            ->assertNotFound();
+    }
+
 }

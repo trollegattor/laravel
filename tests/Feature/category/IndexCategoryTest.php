@@ -13,9 +13,18 @@ class IndexCategoryTest extends TestCase
     /**
      * @return void
      */
-    public function testCategoryIndexGet()
+    public function testCategoryIndexGetSuccessfully()
     {
          $this->getJson('/api/category')
              ->assertOk();
+    }
+
+    /**
+     * @return void
+     */
+    public function testCategoryIndexGetFailed()
+    {
+        $this->getJson('/api/error')
+            ->assertNotFound();
     }
 }

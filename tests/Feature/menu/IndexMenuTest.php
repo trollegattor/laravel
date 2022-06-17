@@ -9,9 +9,18 @@ class IndexMenuTest extends TestCase
     /**
      * @return void
      */
-    public function testMenuIndexGet()
+    public function testMenuIndexGetSuccessfully()
     {
         $this->getJson('/api/menu')
             ->assertOk();
+    }
+
+    /**
+     * @return void
+     */
+    public function testMenuIndexGetFailed()
+    {
+        $this->getJson('/api/error')
+            ->assertNotFound();
     }
 }

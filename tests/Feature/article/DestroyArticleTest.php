@@ -10,6 +10,7 @@ use Tests\TestCase;
 class DestroyArticleTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * @return void
      */
@@ -19,7 +20,7 @@ class DestroyArticleTest extends TestCase
             'type' => Category::CATEGORY_TYPES['MULTI'],
             'name' => 'News',
             'parent_id' => Category::PARENT_ID['NULL'],
-            ]);
+        ]);
         Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
         $id = Article::query()
             ->where('id', '!=', null)
@@ -27,5 +28,25 @@ class DestroyArticleTest extends TestCase
         $this->deleteJson('/api/article/' . $id->id)
             ->assertStatus(200)
             ->assertJsonMissing($id->attributesToArray());
+    }
+
+    /**
+     * @return void
+     */
+    public function testArticleDestroyFailed()
+    {
+        $newsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['MULTI'],
+            'name' => 'News',
+            'parent_id' => Category::PARENT_ID['NULL'],
+        ]);
+        Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
+        $count = Article::query();
+        for ($i = 1; $count !== null; $i++) {
+            $count = Article::query()->where('id', '=', $i)->first();
+            $id = $i;
+        }
+        $this->deleteJson('/api/category/' . $id)
+            ->assertNotFound();
     }
 }

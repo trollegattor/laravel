@@ -38,7 +38,8 @@ class ShowArticleTest extends TestCase
         ]);
         Article::factory()->count(10)->create(['category_id' => $newsCategory->id]);
         $count = Article::query();
-        for ($i = 1; $count !== null; $i++) {
+        for ($i = 1; $count !== null; $i++)
+        {
             $count = Article::query()->where('id', '=', $i)->first();
             $id = $i;
         }

@@ -87,6 +87,5 @@ class StoreCategoryTest extends TestCase
         ];
         $this->postJson('/api/category', $category)
             ->assertJsonValidationErrors(['name', 'type', 'parent_id']);
-
     }
 }

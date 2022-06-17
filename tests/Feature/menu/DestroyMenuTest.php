@@ -47,4 +47,27 @@ class DestroyMenuTest extends TestCase
             ->assertStatus(200)
             ->assertJsonMissing($id->attributesToArray());
     }
+    public function testCategoryDestroyFailed()
+    {
+        $aboutUsCategory = Category::query()->create([
+            'type' => Category::CATEGORY_TYPES['SINGLE'],
+            'name' => 'About us',
+            'parent_id' => Category::PARENT_ID['NULL'],
+        ]);
+        $aboutUsMenu = Menu::query()->create([
+            'category_id' => $aboutUsCategory->id,
+            'title' => 'About us',
+        ]);
+        Menu::factory()->count(10)->create([
+            'category_id' => $aboutUsCategory->id,
+        ]);
+        $count=Menu::query();
+        for($i=1; $count!==null; $i++)
+        {
+            $count=Menu::query()->where('id','=',$i)->first();
+            $id=$i;
+        }
+        $this->deleteJson('/api/menu/' . $id)
+            ->assertNotFound();
+    }
 }

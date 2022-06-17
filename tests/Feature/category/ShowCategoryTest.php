@@ -43,8 +43,9 @@ class ShowCategoryTest extends TestCase
         for($i=1; $count!==null; $i++)
         {
             $count=Category::query()->where('id','=',$i)->first();
+            $id=$i;
         }
-        $response = $this->getJson('/api/category/'.$i);
+        $response = $this->getJson('/api/category/'.$id);
         $response->assertNotFound();
     }
 }

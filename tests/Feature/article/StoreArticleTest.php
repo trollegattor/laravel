@@ -98,7 +98,8 @@ class StoreArticleTest extends TestCase
             'parent_id' => Category::PARENT_ID['NULL'],
         ]);
         $count = Category::query();
-        for ($i = 1; $count !== null; $i++) {
+        for ($i = 1; $count !== null; $i++)
+        {
             $count = Category::query()->where('id', '=', $i)->first();
             $id = $i;
         }
